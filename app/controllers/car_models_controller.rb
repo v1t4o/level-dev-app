@@ -8,11 +8,18 @@ class CarModelsController < ApplicationController
   end
 
   def show
-    @car_model = CarModel.find(params[:id])
+    @car_model = CarModel.find(params[:id]).decorate
   end
 
   def new
     @car_model = CarModel.new
+    @manufactures = Manufacture.all
+    @fuel_types = FuelType.all
+    @categories = Category.all
+  end
+
+  def edit
+    @car_model = CarModel.find(params[:id])
     @manufactures = Manufacture.all
     @fuel_types = FuelType.all
     @categories = Category.all
@@ -26,13 +33,6 @@ class CarModelsController < ApplicationController
     @fuel_types = FuelType.all
     @categories = Category.all
     render :new
-  end
-
-  def edit
-    @car_model = CarModel.find(params[:id])
-    @manufactures = Manufacture.all
-    @fuel_types = FuelType.all
-    @categories = Category.all
   end
 
   def update
